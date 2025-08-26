@@ -153,11 +153,10 @@ LOGIN_REDIRECT_URL = '/'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'travel_lyke_db',
-        'USER': 'root',
-        'PASSWORD': 'Kushal',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': 'KushalSheth$Travel',
+        'USER': 'KushalSheth',
+        'PASSWORD': 'Zxcvbnma00',
+        'HOST': 'KushalSheth.mysql.pythonanywhere-services.com',
     }
 }
 
