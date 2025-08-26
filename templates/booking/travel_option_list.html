@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h2 class="card-title mb-4">Available Travel Options</h2>
+                <form method="get" class="row g-3 mb-4">
+                    <div class="col-md-3">
+                        <select name="type" class="form-select">
+                            <option value="">All Types</option>
+                            <option value="flight" {% if request.GET.type == 'flight' %}selected{% endif %}>Flight</option>
+                            <option value="train" {% if request.GET.type == 'train' %}selected{% endif %}>Train</option>
+                            <option value="bus" {% if request.GET.type == 'bus' %}selected{% endif %}>Bus</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" name="source" class="form-control" placeholder="Source" value="{{ request.GET.source }}">
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" name="destination" class="form-control" placeholder="Destination" value="{{ request.GET.destination }}">
+                    </div>
+                    <div class="col-md-3">
+                        <input type="date" name="date" class="form-control" value="{{ request.GET.date }}">
+                    </div>
+                    <div class="col-md-12 text-end">
+                        <button type="submit" class="btn btn-outline-primary">Filter</button>
+                    </div>
+                </form>
+                <div class="table-responsive">
+                    <table class="table table-striped align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Type</th>
+                                <th>Source</th>
+                                <th>Destination</th>
+                                <th>Departure</th>
+                                <th>Price</th>
+                                <th>Seats</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for option in options %}
+                            <tr>
+                                <td>{{ option.type|title }}</td>
+                                <td>{{ option.source }}</td>
+                                <td>{{ option.destination }}</td>
+                                <td>{{ option.departure|date:'M d, Y H:i' }}</td>
+                                <td>₹{{ option.price }}</td>
+                                <td>{{ option.seats }}</td>
+                                <td>
+                                    <a href="/book/{{ option.id }}/" class="btn btn-success btn-sm">Book</a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr><td colspan="7" class="text-center">No travel options available.</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

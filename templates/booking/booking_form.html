@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h3 class="card-title mb-3">Book Travel Option</h3>
+                <ul class="list-group list-group-flush mb-3">
+                    <li class="list-group-item"><strong>Type:</strong> {{ option.type|title }}</li>
+                    <li class="list-group-item"><strong>From:</strong> {{ option.source }}</li>
+                    <li class="list-group-item"><strong>To:</strong> {{ option.destination }}</li>
+                    <li class="list-group-item"><strong>Departure:</strong> {{ option.departure|date:'M d, Y H:i' }}</li>
+                    <li class="list-group-item"><strong>Price:</strong> ₹{{ option.price }}</li>
+                    <li class="list-group-item"><strong>Seats Available:</strong> {{ option.seats }}</li>
+                </ul>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">Confirm Booking</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

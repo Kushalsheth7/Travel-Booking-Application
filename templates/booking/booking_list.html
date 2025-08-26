@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h2 class="card-title mb-4">My Bookings</h2>
+                <div class="table-responsive">
+                    <table class="table table-striped align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Travel</th>
+                                <th>Source</th>
+                                <th>Destination</th>
+                                <th>Departure</th>
+                                <th>Seats</th>
+                                <th>Total Price</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for booking in bookings %}
+                            <tr>
+                                <td>{{ booking.travel_option.type|title }}</td>
+                                <td>{{ booking.travel_option.source }}</td>
+                                <td>{{ booking.travel_option.destination }}</td>
+                                <td>{{ booking.travel_option.departure|date:'M d, Y H:i' }}</td>
+                                <td>{{ booking.seats }}</td>
+                                <td>₹{{ booking.price }}</td>
+                                <td>{{ booking.status|title }}</td>
+                                <td>
+                                    {% if booking.status != 'cancelled' %}
+                                    <a href="/cancel/{{ booking.id }}/" class="btn btn-outline-danger btn-sm">Cancel</a>
+                                    {% else %}
+                                    <span class="text-muted">Cancelled</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr><td colspan="8" class="text-center">No bookings found.</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
