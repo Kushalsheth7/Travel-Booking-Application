@@ -73,3 +73,11 @@
 
 ## Deployment
 - See Django docs for deployment to Google Cloud Platform or other services
+
+
+mysql -u KushalSheth -p -h KushalSheth.mysql.pythonanywhere-services.com
+SHOW DATABASES;
+USE your_db_name;
+SHOW TABLES;
+KushalSheth$Travel
+SELECT * FROM auth_user LIMIT 5;
